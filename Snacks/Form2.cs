@@ -20,7 +20,7 @@ namespace Snacks
           listboxui3();
            listboxui4();
         }
-        Kaina kaina = new Kaina();
+        Price price = new Price();
         private void Button1_Click(object sender, EventArgs e)
         {
             int itemCount = listBox1.Items.Count;
@@ -39,11 +39,10 @@ namespace Snacks
                 listBox5.Items.Add(listBox1.SelectedItem);
                 int i;
                 i = listBox1.SelectedIndex;
-                kaina.preke = kainos[i];
-                //kaina.bendra = kaina.bendra + kaina.preke;
-                listBox6.Items.Add(kaina.preke);
-                textBox1.Text = kaina.GetPrice().ToString();
-                textBox2.Text = kaina.GetPricePVM().ToString();
+                price.preke = kainos[i];
+                listBox6.Items.Add(price.preke);
+                textBox1.Text = price.GetPrice().ToString();
+                textBox2.Text = price.GetPricePVM().ToString();
             }
         }
         
@@ -66,22 +65,43 @@ namespace Snacks
                 listBox5.Items.Add(listBox3.SelectedItem);
                 int i;
                 i = listBox3.SelectedIndex;
-                kaina.preke = kainosG[i];
-                listBox6.Items.Add(kaina.preke);
-                textBox1.Text = kaina.GetPrice().ToString();
-                textBox2.Text = kaina.GetPricePVM().ToString();
+                price.preke = kainosG[i];
+                listBox6.Items.Add(price.preke);
+                textBox1.Text = price.GetPrice().ToString();
+                textBox2.Text = price.GetPricePVM().ToString();
             }
         }
 
         private void Button3_Click(object sender, EventArgs e)
         {
-            String kainosK = listBox5.Items[20].ToString();
-            int i;
-            i = listBox5.SelectedIndex;
-            kaina.preke = kainosK[i];
+            int itemCount = listBox5.Items.Count;
+
+            double[] kainosK = new double[itemCount];
+            for(int i=0;i<itemCount;i++)
+            {
+                kainosK[i] = (double)listBox6.Items[i];
+            }
+            if (listBox5.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Pasirinkite viena produkta");
+            }
+            if (listBox5.SelectedItems.Count != 0)
+            {
+                int p;
+                p = listBox5.SelectedIndex;
+                price.preke = kainosK[p];
+            textBox1.Text = price.Atimt().ToString();
+            textBox2.Text = price.AtimtPVM().ToString();
             listBox5.Items.Remove(listBox5.SelectedItem);
-            textBox1.Text = kaina.Atimt().ToString();
-            textBox2.Text = kaina.AtimtPVM().ToString();
+            listBox6.Items.Remove(listBox6.Items[p]);
+            if (listBox5.Items.Count==0)
+                {
+                    textBox1.Text = "0";
+                    textBox2.Text = "0";
+                }
+
+            }
+            
             }
         void listboxui()
         {

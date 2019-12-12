@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Snacks
 {
-   class Kaina
+   class Price
     {
         public double PVM = 1.21;
         public double preke;
